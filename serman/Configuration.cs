@@ -27,8 +27,8 @@
 
     public class Configuration : IConfiguration
     {
-        public string ServiceBin => @"C:\Program Files\serman";
-        public string ServiceData => @"C:\ProgramData\serman";
+        public string ServiceBin => Environment.ExpandEnvironmentVariables(@"%ProgramFiles%\serman");
+        public string ServiceData => Environment.ExpandEnvironmentVariables(@"%ProgramData%\serman");
         public string WrapperPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "winsw.exe");
     }
 }
