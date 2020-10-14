@@ -30,19 +30,24 @@
 
     public static class ContextUtils
     {
-        public static string GetServiceDirectory(this Context ctx)
+        public static string GetServiceBinDirectory(this Context ctx)
         {
-            return Path.Combine(ctx.Config.ServiceRoot, ctx.ServiceId);
+            return Path.Combine(ctx.Config.ServiceBin, ctx.ServiceId);
+        }
+
+        public static string GetServiceDataDirectory(this Context ctx)
+        {
+            return Path.Combine(ctx.Config.ServiceData, ctx.ServiceId);
         }
 
         public static string GetTargetServiceConfigPath(this Context ctx)
         {
-            return Path.Combine(ctx.GetServiceDirectory(), $"{ctx.ServiceId}.xml");
+            return Path.Combine(ctx.GetServiceBinDirectory(), $"{ctx.ServiceId}.xml");
         }
 
         public static string GetTargetWrapperPath(this Context ctx)
         {
-            return Path.Combine(ctx.GetServiceDirectory(), $"{ctx.ServiceId}.exe");
+            return Path.Combine(ctx.GetServiceBinDirectory(), $"{ctx.ServiceId}.exe");
         }
 
         public static string GetSourceServiceConfigDirectory(this Context ctx) =>

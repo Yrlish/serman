@@ -4,11 +4,8 @@
     using RunProcessAsTask;
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Xml.Linq;
 
     [Verb("install", HelpText = "Install a service")]
@@ -72,7 +69,8 @@
                             }
                             .RunWrapper("uninstall");
 
-                            Console.WriteLine("Done. You should manually remove directory " + ctx.GetServiceDirectory());
+                            Console.WriteLine("Done. You should manually remove directory " +
+                                              ctx.GetServiceBinDirectory() + " and " + ctx.GetServiceDataDirectory());
 
                             return 0;
                         },
@@ -118,7 +116,8 @@
 
         static Context DeployWrapper(this Context ctx)
         {
-            EnsureDirectory(ctx.GetServiceDirectory(), ctx.Overwrite);
+            EnsureDirectory(ctx.GetServiceBinDirectory(), ctx.Overwrite);
+            EnsureDirectory(ctx.GetServiceDataDirectory(), ctx.Overwrite);
             File.Copy(ctx.Config.WrapperPath, ctx.GetTargetWrapperPath(), ctx.Overwrite);
             return ctx;
         }

@@ -12,7 +12,12 @@
         /// <summary>
         /// Directory containing the services
         /// </summary>
-        string ServiceRoot { get; }
+        string ServiceBin { get; }
+
+        /// <summary>
+        /// Directory containing the services log files
+        /// </summary>
+        string ServiceData { get; }
 
         /// <summary>
         /// Path to the wrapper.exe
@@ -22,14 +27,8 @@
 
     public class Configuration : IConfiguration
     {
-        public string ServiceRoot
-        {
-            get { return @"c:\serman\services"; }
-        }
-
-        public string WrapperPath
-        {
-            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "winsw.exe"); }
-        }
+        public string ServiceBin => @"C:\Program Files\serman";
+        public string ServiceData => @"C:\ProgramData\serman";
+        public string WrapperPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "winsw.exe");
     }
 }
